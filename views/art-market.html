@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kunstbørs</title>
+  <link rel="stylesheet" href="css/art-market.css?v=<%= locals.cachebuster %>" />
+</head>
+<body>
+  <main class="market">
+    <header class="market__hero">
+      <div>
+        <p class="market__eyebrow">Kunstbørs</p>
+        <h1>Handelsplatform for kunstværker</h1>
+        <p class="market__lead">
+          Opret, filtrér og prissæt værker i et samlet katalog. Platformen bruger databasen til at gemme
+          annoncer og gøre dem tilgængelige via API.
+        </p>
+      </div>
+      <div class="market__stats" aria-label="Platform status">
+        <div>
+          <span id="listing-count">0</span>
+          <small>aktive annoncer</small>
+        </div>
+        <div>
+          <span id="listing-value">–</span>
+          <small>samlet udbudspris</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="market__controls" aria-label="Filtre">
+      <label>
+        Søg
+        <input type="search" id="search" placeholder="Titel, kunstner eller materiale" />
+      </label>
+      <label>
+        Status
+        <select id="status">
+          <option value="">Alle</option>
+          <option value="available" selected>Til salg</option>
+          <option value="reserved">Reserveret</option>
+          <option value="sold">Solgt</option>
+        </select>
+      </label>
+      <label>
+        Kunstner
+        <input type="text" id="artist" placeholder="fx Anna Holm" />
+      </label>
+      <button type="button" id="refresh">Opdater</button>
+    </section>
+
+    <section class="market__grid" aria-live="polite" aria-busy="false">
+      <div id="listings" class="market__listings"></div>
+      <p id="empty-state" class="market__empty" hidden>Ingen annoncer matcher dine filtre endnu.</p>
+    </section>
+
+    <section class="market__panel" aria-label="Opret annonce">
+      <h2>Opret ny annonce</h2>
+      <p class="market__hint">
+        Tilføj et værk til databasen. Kræver API-secret hvis serveren har aktiveret API-sikkerhed.
+      </p>
+      <form id="listing-form">
+        <div class="market__form-row">
+          <label>
+            Titel
+            <input type="text" name="title" required />
+          </label>
+          <label>
+            Kunstner
+            <input type="text" name="artist" required />
+          </label>
+        </div>
+        <div class="market__form-row">
+          <label>
+            År
+            <input type="number" name="year" min="1000" max="2100" />
+          </label>
+          <label>
+            Materiale
+            <input type="text" name="medium" placeholder="Olie på lærred" />
+          </label>
+          <label>
+            Placering
+            <input type="text" name="location" placeholder="København" />
+          </label>
+        </div>
+        <div class="market__form-row">
+          <label>
+            Pris
+            <input type="number" name="price" step="0.01" />
+          </label>
+          <label>
+            Valuta
+            <select name="currency">
+              <option value="DKK" selected>DKK</option>
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+            </select>
+          </label>
+          <label>
+            Status
+            <select name="status">
+              <option value="available" selected>Til salg</option>
+              <option value="reserved">Reserveret</option>
+              <option value="sold">Solgt</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          Billed-URL
+          <input type="url" name="imageUrl" placeholder="https://" />
+        </label>
+        <label>
+          Beskrivelse
+          <textarea name="description" rows="3"></textarea>
+        </label>
+        <label>
+          API-secret (valgfri)
+          <input type="password" name="apiSecret" autocomplete="off" />
+        </label>
+        <button type="submit">Gem annonce</button>
+        <p id="form-message" class="market__message" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/art-market.js?v=<%= locals.cachebuster %>"></script>
+</body>
+</html>

@@ -116,6 +116,7 @@ function setStorage() {
   env.profile_collection = readENV('MONGO_PROFILE_COLLECTION', 'profile');
   env.devicestatus_collection = readENV('MONGO_DEVICESTATUS_COLLECTION', 'devicestatus');
   env.food_collection = readENV('MONGO_FOOD_COLLECTION', 'food');
+  env.art_collection = readENV('MONGO_ART_COLLECTION', 'art_listings');
 
   // TODO: clean up a bit
   // Some people prefer to use a json configuration file instead.
